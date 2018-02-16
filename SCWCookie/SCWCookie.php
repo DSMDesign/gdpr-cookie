@@ -4,7 +4,8 @@
 // This does not include essential Cart/login session cookies.
 // Usage Instructions
 // require (SCWCookie/SCWCookie);
-// SCWCookie::cookieWarning(cookieWarning);
+// $cookie = new SCWCookie();
+// $cookie->cookieWarning(PARAMETERS);
 
 class SCWCookie
 {
