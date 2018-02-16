@@ -1,5 +1,5 @@
 # SCWCookie
-Php Cookie checker for Analytics and Tawk.To (GDPR Compliance)
+Php Cookie checker for Analytics, Tawk.To and HotJar (GDPR Compliance)
 
 This small class will add a Cookie Checker to any website.
 
@@ -10,9 +10,10 @@ Place the code in the header file where you would normally put the analytics cod
     require('SCWCookie/SCWCookie.php');
     $cookie = new SCWCookie();
     $cookie->cookieWarning([
-        'analytics'  => 'UA-xxxxxxx-xx',
+        'analytics'  => '',
         'tawkto'     => '',
-        'policy'     => '/cookie-policy'
+        'hotjar'     => '',
+        'policy'     => ''
     ]);
     
 All values in array are optional.
@@ -20,6 +21,7 @@ All values in array are optional.
 If cookies are accepted it will allow :
 Google Analytics
 Tawk.to
+HotJar
 Both are optional.
 
 Policy will display a link to cookie policy page on your website.
