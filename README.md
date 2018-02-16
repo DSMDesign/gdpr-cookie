@@ -5,6 +5,8 @@ This small class will add a Cookie Checker to any website.
 
 To call the class within a site simply use :
 
+Place the code in the header file where you would normally put the analytics code.
+
     require('SCWCookie/SCWCookie.php');
     $cookie = new SCWCookie();
     $cookie->cookieWarning([
