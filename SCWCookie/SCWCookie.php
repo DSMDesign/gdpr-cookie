@@ -27,24 +27,28 @@ class SCWCookie
         // set cookie
         $cookie = $this->checkCookie();
         
-        // check if cookie is set
-        if (!$cookie) {
-            $this->displayWarning($policy);
-        } else {
-            // if cookies are permitted
-            if ($cookie == 'allowed') {
-                // add google analytics
-                if ($analytics != '') {
-                    $this->analytics($analytics);
-                }
-                // add tawk.to
-                if ($tawkto != '') {
-                    $this->tawkTo($tawkto);
-                }
-            } else {
-                // if not do not display any
-                return false;
+        if ($cookie != 'not-allowed') {
+            // add google analytics
+            if ($analytics != '') {
+                $this->analytics($analytics);
             }
+            // add tawk.to
+            if ($tawkto != '') {
+                $this->tawkTo($tawkto);
+            }
+
+            // add HotJar
+            if ($hotjar != '') {
+                $this->hotJar($hotjar);
+            }
+        } else {
+            // if not do not display any
+            return false;
+        }
+        
+        // check if cookie policy needs displaying
+        if (!$cookie) {
+            $this->displayWarning($policy, $tawkto);
         }
     }
 
@@ -52,7 +56,7 @@ class SCWCookie
      * Function to display the cookie warning bar
      * @param  string $policy If policy page is sent display link
      */
-    public function displayWarning($policy = '')
+    public function displayWarning($policy = '', $tawkto = '')
     {
         ?>
         <style>
@@ -66,7 +70,7 @@ class SCWCookie
                 float: right; background: #20BF6B; height: 34px; padding: 0 20px; color: white; margin: 0 10px 0 0; cursor: pointer; border: none;
             }
             .policy {
-                display: inline-block; background: #F39C12; height: 34px; padding: 0 20px; color: white; margin: 0 10px 0 0; cursor: pointer; border: none;
+                color:white;
             }
             .no:hover,
             .yes:hover,
@@ -75,18 +79,28 @@ class SCWCookie
             }
             .no:hover {background: #D1422C;}
             .yes:hover {background: #1CB162;}
-            .policy:hover {background: #E2900F;}
         </style>
         <div class="cookieWarning animated slideInUp">
-            We use cookies to track usage on our site, allow?
-            <form method="post" action="" class="pull-right">
-                <?= $policy != '' ?
-                    '<a href="'.$policy.'" class="policy">Cookie Policy</a>'
-                    : false;
-                ?>
-                <button type="submit" name="allow" value="not allowed" class="no">No</button>
-                <button type="submit" name="allow" value="allowed" class="yes">Yes</button>
-            </form>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-9">
+                        We use cookies to personalise content <?= $tawkto != '' ? ', provide live chat' : false; ?> and to analyse our web traffic.<br/>
+                        This helps us to provide a better user experience for you whilst you browse our site.<br/>
+                        You are consenting to our cookies if you continue to use this website.
+                    </div>
+                    <div class="col-sm-3 text-right">
+                        <form method="post" action="">
+                            <button type="submit" name="allow" value="allowed" class="yes">OK</button>
+                        </form>
+                        <br/>
+                        <br/>
+                        <?= $policy != '' ?
+                            '<a href="'.$policy.'" class="policy">Read our Cookie Policy</a>'
+                            : false;
+                        ?>
+                    </div>
+                </div>
+            </div>
         </div>
         <?php
     }
@@ -178,7 +192,7 @@ class SCWCookie
             $expire = time() + (24 * 60 * 60);
         } else {
             // if yes set cookie to expire in 1 year
-            $expire = time() + (365 * 24 * 60 * 60);
+            $expire = time() + (30 * 24 * 60 * 60);
         }
         setcookie('allowCookies', $value, $expire, "/");
     }
