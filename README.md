@@ -7,7 +7,7 @@ To call the class within a site simply follow the below steps :
 
 1. Upload the entire scwCookie folder into the public_html (or similar) root folder of your website.
 
-2. If done correctly you will then be able to visit [domain]/scwCookie/test.php and see the "Installed correctly" message.
+2. If done correctly you will then be able to visit [domain]/scwCookie/install-check.txt and see the "Installed correctly" message.
 
 3. Then add the following code before the closing body tag of each page:
 ```
