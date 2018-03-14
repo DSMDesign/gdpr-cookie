@@ -19,8 +19,9 @@ To call the class within a site simply follow the below steps :
 Thats it, a window will now display in the footer of your site allowing people to manage the cookies you use.
 
 ## Updates
-### 2.0
-- Toggle which cookie is allowed
-
 ### 2.1
 - Fix for sites when headers are sent before close of body tag e.g. Wordpress
+
+### 2.0
+- Full rewrite
+- Add ability to toggle which cookie is allowed
