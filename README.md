@@ -9,7 +9,7 @@ To call the class within a site simply follow the below steps :
 
 2. If done correctly you will then be able to visit [domain]/scwCookie/test.php and see the "Installed correctly" message.
 
-3. Then add the following code before the closing </body> tag of each page:
+3. Then add the following code before the closing body tag of each page:
 ```
 <?php require_once $_SERVER['DOCUMENT_ROOT'].'/scwCookie/output/template.php'; ?>
 ```
