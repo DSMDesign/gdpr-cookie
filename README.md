@@ -21,6 +21,11 @@ Thats it, a window will now display in the footer of your site allowing people t
 ## Updates
 ### 2.1
 - Fix for sites when headers are sent before close of body tag e.g. Wordpress
+- Add ability to set default value (allowed | blocked)
+- Add Hotjar and Smartsupp embed codes
+- Add ability to specify location of panel toggle (left | center | right)
+- Bug fixes
+
 
 ### 2.0
 - Full rewrite
