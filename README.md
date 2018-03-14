@@ -16,5 +16,4 @@ To call the class within a site simply follow the below steps :
 
 4. Then open config.ini in your chosen editor and set the values to match your sites configuration
 
-
 Thats it, a window will now display in the footer of your site allowing people to manage the cookies you use.
