@@ -4,7 +4,7 @@ namespace ScwCookie;
 
 class ScwCookie
 {
-    private $config       = [];
+    public $config        = [];
     private $decisionMade = false;
     private $choices      = [];
     
@@ -23,12 +23,14 @@ class ScwCookie
             $cookie = self::decrypt($cookie);
             return $cookie;
         }
-        
+
         $return = [];
-        foreach ($this->enabledCookies() as $name => $label) {
-            $return[$name] = 'allowed';
+        $enabledCookies = $this->enabledCookies();
+        if (is_array($enabledCookies)) {
+            foreach ($this->enabledCookies() as $name => $label) {
+                $return[$name] = $this->config['unsetDefault'];
+            }
         }
-        self::setCookie('scwCookie', self::encrypt($return), 52, 'weeks');
         return $return;
     }
 
@@ -40,6 +42,7 @@ class ScwCookie
 
     public static function decrypt($value)
     {
+        $value = str_replace('\"', '"', $value);
         $return = json_decode($value, true);
         return $return;
     }
@@ -50,14 +53,11 @@ class ScwCookie
         return isset($choices[$name]) && $choices[$name] == 'allowed';
     }
 
-    public function setGACode($code)
+    public function getCode($name)
     {
-        $this->gaCode = $code;
-    }
-
-    public function getGACode()
-    {
-        return $this->gaCode;
+        return isset($this->config[$name]) && isset($this->config[$name]['code'])
+            ? $this->config[$name]['code']
+            : false;
     }
 
     public function output()
@@ -76,22 +76,34 @@ class ScwCookie
         if ($this->config['Google_Analytics']['enabled'] && $this->isAllowed('Google_Analytics')) {
             $return[] = $this->getOutputHTML('googleAnalytics');
         }
+        
+        // Get Smartsupp output
+        if ($this->config['Smartsupp']['enabled'] && $this->isAllowed('Smartsupp')) {
+            $return[] = $this->getOutputHTML('smartsupp');
+        }
+        
+        // Get Hotjar output
+        if ($this->config['Hotjar']['enabled'] && $this->isAllowed('Hotjar')) {
+            $return[] = $this->getOutputHTML('hotjar');
+        }
+
         return implode("\n", $return);
     }
 
     public function getOutputHTML($filename)
     {
-        if (!file_exists(__DIR__.'/output/'.$filename.'.php')) {
+        if (!file_exists(__DIR__.'/output/cookies/'.$filename.'.php')) {
             return false;
         }
         
         ob_start();
-        include __DIR__.'/output/'.$filename.'.php';
+        include __DIR__.'/output/cookies/'.$filename.'.php';
         return trim(ob_get_clean());
     }
 
     public function enabledCookies()
     {
+        $return = [];
         foreach ($this->config as $name => $value) {
             if (!is_array($value) || !isset($value['enabled']) || !$value['enabled']) {
                 continue;

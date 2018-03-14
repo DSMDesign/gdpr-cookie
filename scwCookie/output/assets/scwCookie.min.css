@@ -1,5 +1,5 @@
 body.scw-cookie-in {
-    margin-bottom: 80px !important;
+    margin-bottom: 70px !important;
 }
 .scw-cookie-panel-toggle,
 .scw-cookie-settings,
@@ -13,11 +13,13 @@ body.scw-cookie-in {
     background: inherit;
     border-top: solid 3px #FFFFFF;
     cursor: pointer;
-    left: 10px;
     padding: 10px;
     position: absolute;
     transform: translateY(-100%);
 }
+.scw-cookie-panel-toggle-left   { left: 10px; }
+.scw-cookie-panel-toggle-center { left: calc(50% - 22.5px); }
+.scw-cookie-panel-toggle-right  { right: 10px; }
 .scw-cookie-panel-toggle:hover {
     border-top-color: #20BF6B;
 }
@@ -27,7 +29,7 @@ body.scw-cookie-in {
     color: #FFFFFF;
     position: fixed;
     width: 100%;
-    z-index: 99;
+    z-index: 9999999999;
 }
 .scw-cookie:not(.scw-cookie-out) {
     animation: slideIn .5s ease-in-out;
@@ -106,10 +108,11 @@ body.scw-cookie-in {
 }
 .scw-cookie-toggle {
     border: solid 1px;
+    box-sizing: border-box;
     float: left;
     margin-top: 10px;
     padding: 5px;
-    width: calc(50% - 10px);
+    width: calc(50% - 5px);
 }
 .scw-cookie-toggle:nth-child(even) {
     margin-right: 5px;

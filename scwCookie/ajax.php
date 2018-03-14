@@ -17,13 +17,22 @@ switch ($_POST['action']) {
     case 'toggle':
         // Update if cookie allowed or not
         $choices = ScwCookie\ScwCookie::getCookie('scwCookie');
-        $choices = ScwCookie\ScwCookie::decrypt($choices);
+        if ($choices == false) {
+            $choices = [];
+            $scwCookie = new ScwCookie\ScwCookie;
+            $enabledCookies = $scwCookie->enabledCookies();
+            if (is_array($enabledCookies)) {
+                foreach ($enabledCookies as $name => $label) {
+                    $choices[$name] = $scwCookie->config['unsetDefault'];
+                }
+            }
+            ScwCookie\ScwCookie::setCookie('scwCookie', ScwCookie\ScwCookie::encrypt($choices), 52, 'weeks');
+        } else {
+            $choices = ScwCookie\ScwCookie::decrypt($choices);
+        }
         $choices[$_POST['name']] = $_POST['value'] == 'true' ? 'allowed' : 'blocked';
         $choices = ScwCookie\ScwCookie::encrypt($choices);
         ScwCookie\ScwCookie::setCookie('scwCookie', $choices, 52, 'weeks');
-        echo '<hr><pre>';
-        print_r($choices);
-        echo '</pre><hr>';
         break;
 
     default:
