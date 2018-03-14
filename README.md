@@ -1,4 +1,4 @@
-# SCW Cookie
+# SCW Cookie 2.0
 Php Cookie checker for Google Analytics, Tawk.To, Smartsupp and HotJar (GDPR Compliance)
 
 This small class will add a Cookie Checker to any website.
