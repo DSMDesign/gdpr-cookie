@@ -1,4 +1,4 @@
-# SCW Cookie 2.1
+# SCW Cookie 2.2
 PHP cookie checker for Google Analytics, Tawk.To, Smartsupp and HotJar (GDPR Compliance)
 
 This small class will add a cookie toggle window to any website.
@@ -19,6 +19,12 @@ To add this functionality within a site simply follow the below steps :
 Thats it, a window will now display in the footer of your site allowing people to manage the cookies you use.
 
 ## Updates
+### 2.2
+- Add Tawk.to embed code
+- Add tooltips to icons
+- Expand on label for cookies
+- Bug fixes
+
 ### 2.1
 - Fix for sites when headers are sent before close of body tag e.g. Wordpress
 - Add ability to set default value (allowed | blocked)

@@ -50,3 +50,12 @@ jQuery(document).on('change', '.scw-cookie-toggle input[type="checkbox"]', funct
         }
     );
 });
+
+jQuery(document).ready(function($){
+    $('.scw-cookie-tooltip-trigger').hover(function(){
+        label = $(this).attr('data-label');
+        $(this).append('<span class="scw-cookie-tooltip">'+label+'</span>');
+    }, function(){
+        $(this).find('.scw-cookie-tooltip').remove();
+    });
+});

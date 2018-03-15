@@ -5,9 +5,9 @@ body.scw-cookie-in {
 .scw-cookie-settings,
 .scw-cookie-policy,
 .scw-cookie-btn,
+.scw-cookie-settings img,
 .scw-cookie-switch {
-    transition: all linear .3s;
-    transition-property: background, border-color, opacity;
+    transition: all .3s ease;
 }
 .scw-cookie-panel-toggle {
     background: inherit;
@@ -16,6 +16,27 @@ body.scw-cookie-in {
     padding: 10px;
     position: absolute;
     transform: translateY(-100%);
+}
+.scw-cookie-panel-toggle::before {
+    background: #2D3436;
+    content: 'Turn cookies on / off';
+    float: left;
+    height: 20px;
+    line-height: 25px;
+    margin-right: 0;
+    opacity: 0;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    transition: all 0.3s ease;
+    visibility: hidden;
+    width: 0;
+}
+.scw-cookie-panel-toggle:hover::before {
+    opacity: 1;
+    visibility: visible;
+    margin-right: 10px;
+    width: 140px;
 }
 .scw-cookie-panel-toggle-left   { left: 10px; }
 .scw-cookie-panel-toggle-center { left: calc(50% - 22.5px); }
@@ -27,6 +48,7 @@ body.scw-cookie-in {
     background: #2D3436;
     bottom: 0;
     color: #FFFFFF;
+    left: 0;
     position: fixed;
     width: 100%;
     z-index: 9999999999;
@@ -78,12 +100,15 @@ body.scw-cookie-in {
     display: inline-block;
     line-height: 30px;
     margin-left: 13px;
-    opacity: .7;
     text-align: center;
     width: 20px;
 }
-.scw-cookie-settings:hover,
-.scw-cookie-policy:hover {
+.scw-cookie-settings img,
+.scw-cookie-policy img {
+    opacity: .7;
+}   
+.scw-cookie-settings:hover img,
+.scw-cookie-policy:hover img {
     opacity: 1;
 }
 .scw-cookie-settings img,
@@ -135,7 +160,33 @@ body.scw-cookie-in {
     width: 20%;
 }
 
+.scw-cookie-tooltip-trigger {
+    position: relative;
+}
+.scw-cookie-tooltip {
+    animation: fadeIn .5s ease-in-out;
+    background: #fff;
+    border: solid 1px #000;
+    color: #000;
+    font-size: 11px;
+    left: 50%;
+    line-height: 23px;
+    padding: 0 10px;
+    position: absolute;
+    top: 0;
+    transform: translate(-50%, -100%);
+    width: 75px;
+}
+
 /* Animations */
+@-webkit-keyframes fadeIn {
+    from { opacity: 0; visibility: hidden; }
+    to   { opacity: 1; visibility: visible; }
+}
+@keyframes fadeIn {
+    from { opacity: 0; visibility: hidden; }
+    to   { opacity: 1; visibility: visible; }
+}
 @-webkit-keyframes slideIn {
     from { transform: translateY(100%); }
     to   { transform: translateY(0%); }
