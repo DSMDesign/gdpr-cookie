@@ -1,7 +1,7 @@
 # SCW Cookie 2.2
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Quality Score](https://img.shields.io/scrutinizer/g/spatie/laravel-backup.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/laravel-backup)
+[![Quality Score](https://img.shields.io/scrutinizer/g/southcoastweb/gdpr-cookie.svg?style=flat-square)](https://scrutinizer-ci.com/g/southcoastweb/gdpr-cookie)
 
 PHP cookie checker for Google Analytics, Tawk.To, Smartsupp and HotJar (GDPR Compliance)
 
