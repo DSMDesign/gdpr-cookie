@@ -50,6 +50,11 @@ class ScwCookie
         return isset($choices[$name]) && $choices[$name] == 'allowed';
     }
 
+    public function isEnabled($name)
+    {
+        return is_array($name) && isset($name['enabled']) && $name['enabled'];
+    }
+
     public function getCode($name)
     {
         return isset($this->config[$name]) && isset($this->config[$name]['code'])
@@ -100,7 +105,7 @@ class ScwCookie
     {
         $return = [];
         foreach ($this->config as $name => $value) {
-            if (!is_array($value) || !isset($value['enabled']) || !$value['enabled']) {
+            if (!$this->isEnabled($name)) {
                 continue;
             }
             $return[$name] = $value['label'];
