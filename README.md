@@ -18,6 +18,8 @@ To add this functionality within a site simply follow the below steps :
 
 Thats it, a window will now display in the footer of your site allowing people to manage the cookies you use.
 
+#### Remeber to remove any previous cookie code, this will handle that from now on
+
 ## Updates
 ### 2.2
 - Add Tawk.to embed code
