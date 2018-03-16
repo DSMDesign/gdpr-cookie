@@ -26,10 +26,8 @@ class ScwCookie
 
         $return = [];
         $enabledCookies = $this->enabledCookies();
-        if (is_array($enabledCookies)) {
-            foreach ($this->enabledCookies() as $name => $label) {
-                $return[$name] = $this->config['unsetDefault'];
-            }
+        foreach ($this->enabledCookies() as $name => $label) {
+            $return[$name] = $this->config['unsetDefault'];
         }
         return $return;
     }
@@ -157,7 +155,7 @@ class ScwCookie
                 
                 default:
                     header('HTTP/1.0 403 Forbidden');
-                    throw new Exception("Lifetime not recognised");
+                    throw new \Exception("Lifetime not recognised");
                     break;
             }
 
@@ -166,7 +164,7 @@ class ScwCookie
         } else {
             // Failed parameter check
             header('HTTP/1.0 403 Forbidden');
-            throw new Exception("Incorrect parameter passed to Cookie::set");
+            throw new \Exception("Incorrect parameter passed to Cookie::set");
         }
     }
 

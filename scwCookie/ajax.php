@@ -21,10 +21,8 @@ switch ($_POST['action']) {
             $choices = [];
             $scwCookie = new ScwCookie\ScwCookie;
             $enabledCookies = $scwCookie->enabledCookies();
-            if (is_array($enabledCookies)) {
-                foreach ($enabledCookies as $name => $label) {
-                    $choices[$name] = $scwCookie->config['unsetDefault'];
-                }
+            foreach ($enabledCookies as $name => $label) {
+                $choices[$name] = $scwCookie->config['unsetDefault'];
             }
             ScwCookie\ScwCookie::setCookie('scwCookie', ScwCookie\ScwCookie::encrypt($choices), 52, 'weeks');
         } else {

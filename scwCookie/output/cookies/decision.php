@@ -1,11 +1,11 @@
 <link href="/scwCookie/output/assets/scwCookie.min.css" rel="stylesheet" type="text/css">
-<div class="scw-cookie<?= $this->decisionMade ? ' scw-cookie-out' : false; ?>">
+<div class="scw-cookie<?= $this->decisionMade ? ' scw-cookie-out' : ''; ?>">
     <div class="scw-cookie-panel-toggle scw-cookie-panel-toggle-<?= $this->config['panelTogglePosition']; ?>" onclick="scwCookiePanelToggle()">
         <img src="/scwCookie/output/assets/cookie.png">
     </div>
     <div class="scw-cookie-content">
         <div class="scw-cookie-message">
-            We use cookies to personalise content<?= $this->config['showLiveChatMessage'] ? ', provide live chat' : false; ?> and to analyse our web traffic.
+            We use cookies to personalise content<?= $this->config['showLiveChatMessage'] ? ', provide live chat' : ''; ?> and to analyse our web traffic.
         </div>
         <div class="scw-cookie-decision">
             <div class="scw-cookie-btn" onclick="scwCookieHide()">OK</div>
@@ -30,10 +30,10 @@
             <?php foreach ($this->enabledCookies() as $name => $label) { ?>
                 <div class="scw-cookie-toggle">
                     <div class="scw-cookie-name" onclick="scwCookieToggle(this)"><?= $label; ?></div>
-                    <label class="scw-cookie-switch<?= $this->isAllowed($name) ? ' checked' : false; ?>">
+                    <label class="scw-cookie-switch<?= $this->isAllowed($name) ? ' checked' : ''; ?>">
                         <input type="checkbox"
                             name="<?= $name; ?>"
-                            <?= $this->isAllowed($name) ? 'checked="checked"' : false; ?>
+                            <?= $this->isAllowed($name) ? 'checked="checked"' : ''; ?>
                         >
                         <div></div>
                     </label>
