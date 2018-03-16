@@ -69,24 +69,17 @@ class ScwCookie
         // Get decision window output
         $return[] = $this->getOutputHTML('decision');
 
-        // Get Google Analytics embed code
-        if ($this->config['Google_Analytics']['enabled'] && $this->isAllowed('Google_Analytics')) {
-            $return[] = $this->getOutputHTML('googleAnalytics');
-        }
-        
-        // Get Smartsupp embed code
-        if ($this->config['Smartsupp']['enabled'] && $this->isAllowed('Smartsupp')) {
-            $return[] = $this->getOutputHTML('smartsupp');
-        }
-        
-        // Get Hotjar embed code
-        if ($this->config['Hotjar']['enabled'] && $this->isAllowed('Hotjar')) {
-            $return[] = $this->getOutputHTML('hotjar');
-        }
-        
-        // Get Tawk.to embed code
-        if ($this->config['Tawk.to']['enabled'] && $this->isAllowed('Tawk.to')) {
-            $return[] = $this->getOutputHTML('tawkto');
+        // Get embed codes
+        $embedCodes = [
+            'Google_Analytics' => 'googleAnalytics',
+            'Smartsupp'        => 'smartsupp',
+            'Hotjar'           => 'hotjar',
+            'Tawk.to'          => 'tawkto',
+        ];
+        foreach ($embedCodes as $configKey => $embedFile) {
+            if ($this->config[$configKey]['enabled'] && $this->isAllowed($configKey)) {
+                $return[] = $this->getOutputHTML($embedFile);
+            }
         }
 
         return implode("\n", $return);
