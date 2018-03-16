@@ -148,7 +148,7 @@ class ScwCookie
         return setcookie($name, $value, $expiry, $domain, $secure);
     }
 
-    public function validateSetCookieParams($name, $value, $lifetime, $lifetimePeriod, $domain, $secure)
+    public static function validateSetCookieParams($name, $value, $lifetime, $lifetimePeriod, $domain, $secure)
     {
         // Set allowed time periods
         $lifetimePeriods = array('minutes', 'hours', 'days', 'weeks');
