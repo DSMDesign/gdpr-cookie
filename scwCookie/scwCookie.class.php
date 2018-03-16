@@ -25,7 +25,6 @@ class ScwCookie
         }
 
         $return = [];
-        $enabledCookies = $this->enabledCookies();
         foreach ($this->enabledCookies() as $name => $label) {
             $return[$name] = $this->config['unsetDefault'];
         }
