@@ -117,6 +117,39 @@ class ScwCookie
 
     public static function setCookie($name, $value, $lifetime = 30, $lifetimePeriod = 'days', $domain = '/', $secure = false)
     {
+        // Validate parameters
+        self::validateSetCookieParams($name, $value, $lifetime, $lifetimePeriod, $domain, $secure);
+
+        // Calculate expiry time
+        switch ($lifetimePeriod) {
+            case 'minutes':
+                $expiry = time() + (60 * $lifetime);     // 60 = 1 minute
+                break;
+
+            case 'hours':
+                $expiry = time() + (3600 * $lifetime);   // 3600 = 1 hour
+                break;
+
+            case 'days':
+                $expiry = time() + (86400 * $lifetime);  // 86400 = 1 day
+                break;
+
+            case 'weeks':
+                $expiry = time() + (604800 * $lifetime); // 604800 = 1 week
+                break;
+            
+            default:
+                header('HTTP/1.0 403 Forbidden');
+                throw new \Exception("Lifetime not recognised");
+                break;
+        }
+
+        // Set cookie
+        return setcookie($name, $value, $expiry, $domain, $secure);
+    }
+
+    public function validateSetCookieParams($name, $value, $lifetime, $lifetimePeriod, $domain, $secure)
+    {
         // Set allowed time periods
         $lifetimePeriods = array('minutes', 'hours', 'days', 'weeks');
 
@@ -128,43 +161,13 @@ class ScwCookie
         $validParams = is_string($domain) ? $validParams : false;
         $validParams = is_bool($secure) ? $validParams : false;
 
-        // If correct values are passed
-        if ($validParams) {
-            // Calculate expiry time
-            switch ($lifetimePeriod) {
-                case 'minute':
-                case 'minutes':
-                    $expiry = time() + (60 * $lifetime);        // 60 = 1 minute
-                    break;
-
-                case 'hour':
-                case 'hours':
-                    $expiry = time() + (3600 * $lifetime);      // 3600 = 1 hour
-                    break;
-
-                case 'day':
-                case 'days':
-                    $expiry = time() + (86400 * $lifetime);     // 86400 = 1 day
-                    break;
-
-                case 'week':
-                case 'weeks':
-                    $expiry = time() + (604800 * $lifetime);    // 604800 = 1 week
-                    break;
-                
-                default:
-                    header('HTTP/1.0 403 Forbidden');
-                    throw new \Exception("Lifetime not recognised");
-                    break;
-            }
-
-            // Set cookie
-            return setcookie($name, $value, $expiry, $domain, $secure);
-        } else {
+        if (!$validParams) {
             // Failed parameter check
             header('HTTP/1.0 403 Forbidden');
             throw new \Exception("Incorrect parameter passed to Cookie::set");
         }
+
+        return true;
     }
 
     public static function getCookie($name)
