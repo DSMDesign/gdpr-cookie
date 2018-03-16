@@ -1,4 +1,8 @@
 # SCW Cookie 2.2
+
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![Quality Score](https://img.shields.io/scrutinizer/g/spatie/laravel-backup.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/laravel-backup)
+
 PHP cookie checker for Google Analytics, Tawk.To, Smartsupp and HotJar (GDPR Compliance)
 
 This small class will add a cookie toggle window to any website.
@@ -20,21 +24,11 @@ Thats it, a window will now display in the footer of your site allowing people t
 
 #### Remeber to remove any previous cookie code, this will handle that from now on
 
-## Updates
-### 2.2
-- Add Tawk.to embed code
-- Add tooltips to icons
-- Expand on label for cookies
-- Bug fixes
+## Changelog
+Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
 
-### 2.1
-- Fix for sites when headers are sent before close of body tag e.g. Wordpress
-- Add ability to set default value (allowed | blocked)
-- Add Hotjar and Smartsupp embed codes
-- Add ability to specify location of panel toggle (left | center | right)
-- Bug fixes
+## Contributing
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
-
-### 2.0
-- Full rewrite
-- Add ability to toggle which cookie is allowed
+## License
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
