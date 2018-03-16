@@ -4,7 +4,7 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/southcoastweb/gdpr-cookie.svg?style=flat-square)](https://scrutinizer-ci.com/g/southcoastweb/gdpr-cookie) 
 [![Build Status](https://scrutinizer-ci.com/g/southcoastweb/gdpr-cookie/badges/build.png?b=2.2)](https://scrutinizer-ci.com/g/southcoastweb/gdpr-cookie/build-status/2.2)
 ![Github All Releases](https://img.shields.io/github/downloads/southcoastweb/gdpr-cookie/total.svg)
-![GitHub repo size in bytes](https://img.shields.io/github/repo-size/badges/southcoastweb/gdpr-cookie/shields.svg)
+![GitHub repo size in bytes](https://img.shields.io/github/repo-size/badges/shields.svg)
 
 PHP cookie checker for Google Analytics, Tawk.To, Smartsupp and HotJar (GDPR Compliance)
 
