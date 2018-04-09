@@ -20,7 +20,9 @@ To add this functionality within a site simply follow the below steps :
 <?php require_once $_SERVER['DOCUMENT_ROOT'].'/scwCookie/output/scwCookie.php'; ?>
 ```
 
-4. Then open config.ini in your chosen editor and set the values to match your site configuration
+4. Rename config.example.ini to config.ini
+
+5. Then open config.ini in your chosen editor and set the values to match your site configuration
 
 Thats it, a window will now display in the footer of your site allowing people to manage the cookies you use.
 
