@@ -52,7 +52,8 @@ class ScwCookie
 
     public function isEnabled($name)
     {
-        return is_array($name) && isset($name['enabled']) && $name['enabled'];
+        $check = $this->config[$name];
+        return is_array($check) && isset($check['enabled']) && $check['enabled'];
     }
 
     public function getCode($name)
