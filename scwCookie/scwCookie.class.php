@@ -134,9 +134,6 @@ class ScwCookie
 
     public static function validateSetCookieParams($name, $value, $lifetime, $lifetimePeriod, $domain, $secure)
     {
-        // Set allowed time periods
-        $lifetimePeriods = array('minutes', 'hours', 'days', 'weeks');
-        
         // Types of parameters to check
         $paramTypes = [
             // Type => Array of variables
@@ -148,8 +145,11 @@ class ScwCookie
         // Validate basic parameters
         $validParams = self::basicValidationChecks($paramTypes);
 
-        // More complex validations
-        $validParams = in_array($lifetimePeriod, $lifetimePeriods) ? $validParams : false;
+        // Ensure lifetime period is allowed
+        $lifetimePeriods = array('minutes', 'hours', 'days', 'weeks');
+        if (!in_array($lifetimePeriod, $lifetimePeriods)) {
+            $validParams = false;
+        }
 
         // Ensure parameters are still valid
         if (!$validParams) {
