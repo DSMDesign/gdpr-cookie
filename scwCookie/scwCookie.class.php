@@ -114,8 +114,14 @@ class ScwCookie
         return $return;
     }
 
-    public static function setCookie($name, $value, $lifetime = 30, $lifetimePeriod = 'days', $domain = '/', $secure = false)
-    {
+    public static function setCookie(
+        $name,
+        $value,
+        $lifetime = 30,
+        $lifetimePeriod = 'days',
+        $domain = '/',
+        $secure = false
+    ) {
         // Validate parameters
         self::validateSetCookieParams($name, $value, $lifetime, $lifetimePeriod, $domain, $secure);
 
@@ -140,7 +146,7 @@ class ScwCookie
         ];
 
         // Validate basic parameters
-        $validParams = self::basicValidationChecks($paramTypes)
+        $validParams = self::basicValidationChecks($paramTypes);
 
         // More complex validations
         $validParams = in_array($lifetimePeriod, $lifetimePeriods) ? $validParams : false;
