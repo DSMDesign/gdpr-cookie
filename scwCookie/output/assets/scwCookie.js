@@ -14,6 +14,10 @@ function scwCookieHide()
             jQuery('.scw-cookie').addClass('scw-cookie-slide-out');
             jQuery(document).find('body').removeClass('scw-cookie-in');            
         }
+
+        if (jQuery('.scw-cookie').hasClass('changed')) {
+            location.reload();
+        }
     });
 }
 
@@ -24,7 +28,7 @@ function scwCookieDetails()
 
 function scwCookieToggle(element)
 {
-    jQuery(element).closest('.scw-cookie-toggle').find('input[type="checkbox"]').change();
+    jQuery(element).closest('.scw-cookie-toggle').find('input[type="checkbox"]').click();
 }
 
 function scwCookiePanelToggle()
@@ -40,6 +44,7 @@ function scwCookiePanelToggle()
 }
 
 jQuery(document).on('change', '.scw-cookie-toggle input[type="checkbox"]', function(){
+    jQuery(this).closest('.scw-cookie').addClass('changed');
     jQuery(this).closest('.scw-cookie-switch').toggleClass('checked');
     jQuery.post(
         '/scwCookie/ajax.php',
@@ -53,7 +58,7 @@ jQuery(document).on('change', '.scw-cookie-toggle input[type="checkbox"]', funct
 
 jQuery(document).ready(function($){
     $('.scw-cookie-tooltip-trigger').hover(function(){
-        var label = $(this).attr('data-label');
+        label = $(this).attr('data-label');
         $(this).append('<span class="scw-cookie-tooltip">'+label+'</span>');
     }, function(){
         $(this).find('.scw-cookie-tooltip').remove();
