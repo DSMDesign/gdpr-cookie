@@ -131,20 +131,38 @@ class ScwCookie
         // Set allowed time periods
         $lifetimePeriods = array('minutes', 'hours', 'days', 'weeks');
 
-        // Check values passed
-        $validParams = is_string($name);
-        $validParams = is_string($value) ? $validParams : false;
-        $validParams = is_int($lifetime) ? $validParams : false;
-        $validParams = in_array($lifetimePeriod, $lifetimePeriods) ? $validParams : false;
-        $validParams = is_string($domain) ? $validParams : false;
-        $validParams = is_bool($secure) ? $validParams : false;
+        // Set default to passed
+        $validParams = true;
+        
+        // Types of parameters to check
+        $paramTypes = [
+            // Variable => Type
+            'name'     => 'string',
+            'value'    => 'string',
+            'domain'   => 'string',
+            'lifetime' => 'int',
+            'secure'   => 'bool',
+        ];
 
+        // Loop through parameters specified
+        foreach ($paramTypes as $variable => $type) {
+            $functionName = 'is_'.$type;
+            if (!$functionName(${$variable})) {
+                $validParams = false;
+                break;
+            }
+        }
+
+        // More complex validations
+        $validParams = in_array($lifetimePeriod, $lifetimePeriods) ? $validParams : false;
+
+        // Ensure parameters are still valid
         if (!$validParams) {
             // Failed parameter check
             header('HTTP/1.0 403 Forbidden');
             throw new \Exception("Incorrect parameter passed to Cookie::set");
         }
-
+        
         return true;
     }
 
