@@ -119,29 +119,8 @@ class ScwCookie
         // Validate parameters
         self::validateSetCookieParams($name, $value, $lifetime, $lifetimePeriod, $domain, $secure);
 
-        // Calculate expiry time
-        switch ($lifetimePeriod) {
-            case 'minutes':
-                $expiry = time() + (60 * $lifetime);     // 60 = 1 minute
-                break;
-
-            case 'hours':
-                $expiry = time() + (3600 * $lifetime);   // 3600 = 1 hour
-                break;
-
-            case 'days':
-                $expiry = time() + (86400 * $lifetime);  // 86400 = 1 day
-                break;
-
-            case 'weeks':
-                $expiry = time() + (604800 * $lifetime); // 604800 = 1 week
-                break;
-            
-            default:
-                header('HTTP/1.0 403 Forbidden');
-                throw new \Exception("Lifetime not recognised");
-                break;
-        }
+        // Calculate expiry
+        $expiry = strtotime('+'.$lifetime.' '.$lifetimePeriod);
 
         // Set cookie
         return setcookie($name, $value, $expiry, $domain, $secure);
