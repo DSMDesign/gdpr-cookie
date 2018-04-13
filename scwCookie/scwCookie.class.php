@@ -130,28 +130,17 @@ class ScwCookie
     {
         // Set allowed time periods
         $lifetimePeriods = array('minutes', 'hours', 'days', 'weeks');
-
-        // Set default to passed
-        $validParams = true;
         
         // Types of parameters to check
         $paramTypes = [
-            // Variable => Type
-            'name'     => 'string',
-            'value'    => 'string',
-            'domain'   => 'string',
-            'lifetime' => 'int',
-            'secure'   => 'bool',
+            // Type => Array of variables
+            'string' => [$name, $value, $domain],
+            'int'    => [$lifetime],
+            'bool'   => [$secure],
         ];
 
-        // Loop through parameters specified
-        foreach ($paramTypes as $variable => $type) {
-            $functionName = 'is_'.$type;
-            if (!$functionName(${$variable})) {
-                $validParams = false;
-                break;
-            }
-        }
+        // Validate basic parameters
+        $validParams = self::basicValidationChecks($paramTypes)
 
         // More complex validations
         $validParams = in_array($lifetimePeriod, $lifetimePeriods) ? $validParams : false;
@@ -162,7 +151,20 @@ class ScwCookie
             header('HTTP/1.0 403 Forbidden');
             throw new \Exception("Incorrect parameter passed to Cookie::set");
         }
-        
+
+        return true;
+    }
+
+    public static function basicValidationChecks($parameters)
+    {
+        foreach ($paramTypes as $type => $variables) {
+            $functionName = 'is_'.$type;
+            foreach ($variables as $variable) {
+                if (!$functionName($variable)) {
+                    return false;
+                }
+            }
+        }
         return true;
     }
 
