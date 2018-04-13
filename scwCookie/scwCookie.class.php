@@ -161,9 +161,9 @@ class ScwCookie
         return true;
     }
 
-    public static function basicValidationChecks($parameters)
+    public static function basicValidationChecks($paramTypes)
     {
-        foreach ($parameters as $type => $variables) {
+        foreach ($paramTypes as $type => $variables) {
             $functionName = 'is_'.$type;
             foreach ($variables as $variable) {
                 if (!$functionName($variable)) {
