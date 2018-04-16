@@ -145,12 +145,6 @@ class ScwCookie
         // Validate basic parameters
         $validParams = self::basicValidationChecks($paramTypes);
 
-        // Ensure lifetime period is allowed
-        $lifetimePeriods = array('minutes', 'hours', 'days', 'weeks');
-        if (!in_array($lifetimePeriod, $lifetimePeriods)) {
-            $validParams = false;
-        }
-
         // Ensure parameters are still valid
         if (!$validParams) {
             // Failed parameter check
