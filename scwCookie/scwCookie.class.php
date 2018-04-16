@@ -123,7 +123,7 @@ class ScwCookie
         $secure = false
     ) {
         // Validate parameters
-        self::validateSetCookieParams($name, $value, $lifetime, $lifetimePeriod, $domain, $secure);
+        self::validateSetCookieParams($name, $value, $lifetime, $domain, $secure);
 
         // Calculate expiry
         $expiry = strtotime('+'.$lifetime.' '.$lifetimePeriod);
@@ -132,7 +132,7 @@ class ScwCookie
         return setcookie($name, $value, $expiry, $domain, $secure);
     }
 
-    public static function validateSetCookieParams($name, $value, $lifetime, $lifetimePeriod, $domain, $secure)
+    public static function validateSetCookieParams($name, $value, $lifetime, $domain, $secure)
     {
         // Types of parameters to check
         $paramTypes = [
