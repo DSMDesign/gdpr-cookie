@@ -28,7 +28,7 @@ Thats it, a window will now display in the footer of your site allowing people t
 #### Remember to remove any previous cookie code, this will handle that from now on
 
 ## Changelog
-Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
 ## Contributing
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
