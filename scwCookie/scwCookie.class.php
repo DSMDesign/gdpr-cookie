@@ -77,13 +77,10 @@ class ScwCookie
 
         // Get embed codes
         foreach ($this->config as $configKey => $configValue) {
-            if (!is_array($configValue)) {
+            if (!is_array($configValue) || !$configValue['enabled'] || !$this->isAllowed($configKey)) {
                 continue;
             }
-
-            if ($configValue['enabled'] && $this->isAllowed($configKey)) {
-                $return[] = $this->getOutputHTML('/cookies/'.$configKey.'/output');
-            }
+            $return[] = $this->getOutputHTML('/cookies/'.$configKey.'/output');
         }
 
         return implode("\n", $return);
