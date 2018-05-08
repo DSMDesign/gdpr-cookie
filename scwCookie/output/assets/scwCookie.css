@@ -5,10 +5,23 @@ body.scw-cookie-in {
 .scw-cookie-settings,
 .scw-cookie-policy,
 .scw-cookie-btn,
-.scw-cookie-settings img,
+.scw-cookie-settings .icon,
 .scw-cookie-switch {
     transition: all .3s ease;
 }
+
+.icon {
+    background-image: url(icons.png);
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    height: 25px;
+    width: 25px;
+    display: inline-block;
+}
+.icon.icon-cookie   { background-position: 0 0;     }
+.icon.icon-policy   { background-position: -25px 0; }
+.icon.icon-settings { background-position: -50px 0; }
+
 .scw-cookie-panel-toggle {
     background: inherit;
     border-top: solid 3px #FFFFFF;
@@ -105,16 +118,16 @@ body.scw-cookie-in {
     text-align: center;
     width: 20px;
 }
-.scw-cookie-settings img,
-.scw-cookie-policy img {
+.scw-cookie-settings .icon,
+.scw-cookie-policy .icon {
     opacity: .7;
 }   
-.scw-cookie-settings:hover img,
-.scw-cookie-policy:hover img {
+.scw-cookie-settings:hover .icon,
+.scw-cookie-policy:hover .icon {
     opacity: 1;
 }
-.scw-cookie-settings img,
-.scw-cookie-policy img {
+.scw-cookie-settings .icon,
+.scw-cookie-policy .icon {
     margin-top: -2.5px;
 }
 .scw-cookie-settings {

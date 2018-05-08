@@ -15,22 +15,49 @@ switch ($_POST['action']) {
         break;
 
     case 'toggle':
+        $scwCookie = new ScwCookie\ScwCookie();
+        $return    = [];
+
         // Update if cookie allowed or not
-        $choices = ScwCookie\ScwCookie::getCookie('scwCookie');
+        $choices = $scwCookie->getCookie('scwCookie');
         if ($choices == false) {
             $choices = [];
-            $scwCookie = new ScwCookie\ScwCookie;
             $enabledCookies = $scwCookie->enabledCookies();
             foreach ($enabledCookies as $name => $label) {
                 $choices[$name] = $scwCookie->config['unsetDefault'];
             }
-            ScwCookie\ScwCookie::setCookie('scwCookie', ScwCookie\ScwCookie::encrypt($choices), 52, 'weeks');
+            $scwCookie->setCookie('scwCookie', $scwCookie->encrypt($choices), 52, 'weeks');
         } else {
-            $choices = ScwCookie\ScwCookie::decrypt($choices);
+            $choices = $scwCookie->decrypt($choices);
         }
         $choices[$_POST['name']] = $_POST['value'] == 'true' ? 'allowed' : 'blocked';
-        $choices = ScwCookie\ScwCookie::encrypt($choices);
-        ScwCookie\ScwCookie::setCookie('scwCookie', $choices, 52, 'weeks');
+
+        // Remove cookies if now disabled
+        if ($choices[$_POST['name']] == 'blocked') {
+            $removeCookies = $scwCookie->clearCookieGroup($_POST['name']);
+            $return['removeCookies'] = $removeCookies;
+        }
+
+        $choices = $scwCookie->encrypt($choices);
+        $scwCookie->setCookie('scwCookie', $choices, 52, 'weeks');
+
+        header('Content-Type: application/json');
+        die(json_encode($return));
+        break;
+
+    case 'load':
+        $scwCookie = new ScwCookie\ScwCookie();
+        $return    = [];
+
+        $removeCookies = [];
+
+        foreach ($scwCookie->disabledCookies() as $cookie => $label) {
+            $removeCookies = array_merge($removeCookies, $scwCookie->clearCookieGroup($cookie));
+        }
+        $return['removeCookies'] = $removeCookies;
+
+        header('Content-Type: application/json');
+        die(json_encode($return));
         break;
 
     default:

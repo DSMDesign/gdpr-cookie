@@ -7,7 +7,7 @@ class ScwCookie
     public $config        = [];
     private $decisionMade = false;
     private $choices      = [];
-    
+
     public function __construct()
     {
         $this->config = parse_ini_file("config.ini", true);
@@ -56,11 +56,11 @@ class ScwCookie
         return is_array($check) && isset($check['enabled']) && $check['enabled'];
     }
 
-    public function getCode($name)
+    public function getConfig($name, $attribute)
     {
-        return isset($this->config[$name]) && isset($this->config[$name]['code'])
-            ? $this->config[$name]['code']
-            : false;
+        return isset($this->config[$name]) && isset($this->config[$name][$attribute])
+        ? $this->config[$name][$attribute]
+        : false;
     }
 
     public function output()
@@ -72,19 +72,17 @@ class ScwCookie
     {
         $return = [];
 
-        // Get decision window output
-        $return[] = $this->getOutputHTML('decision');
+        // Get popup output
+        $return[] = $this->getOutputHTML('popup');
 
         // Get embed codes
-        $embedCodes = [
-            'Google_Analytics' => 'googleAnalytics',
-            'Smartsupp'        => 'smartsupp',
-            'Hotjar'           => 'hotjar',
-            'Tawk.to'          => 'tawkto',
-        ];
-        foreach ($embedCodes as $configKey => $embedFile) {
-            if ($this->config[$configKey]['enabled'] && $this->isAllowed($configKey)) {
-                $return[] = $this->getOutputHTML($embedFile);
+        foreach ($this->config as $configKey => $configValue) {
+            if (!is_array($configValue)) {
+                continue;
+            }
+
+            if ($configValue['enabled'] && $this->isAllowed($configKey)) {
+                $return[] = $this->getOutputHTML('/cookies/'.$configKey.'/output');
             }
         }
 
@@ -93,12 +91,12 @@ class ScwCookie
 
     public function getOutputHTML($filename)
     {
-        if (!file_exists(__DIR__.'/output/cookies/'.$filename.'.php')) {
+        if (!file_exists(__DIR__.'/output/'.$filename.'.php')) {
             return false;
         }
-        
+
         ob_start();
-        include __DIR__.'/output/cookies/'.$filename.'.php';
+        include __DIR__.'/output/'.$filename.'.php';
         return trim(ob_get_clean());
     }
 
@@ -107,6 +105,18 @@ class ScwCookie
         $return = [];
         foreach ($this->config as $name => $value) {
             if (!$this->isEnabled($name)) {
+                continue;
+            }
+            $return[$name] = $value['label'];
+        }
+        return $return;
+    }
+
+    public function disabledCookies()
+    {
+        $return = [];
+        foreach ($this->config as $name => $value) {
+            if (!$this->isEnabled($name) || !is_array($value) || $this->isAllowed($name)) {
                 continue;
             }
             $return[$name] = $value['label'];
@@ -168,15 +178,44 @@ class ScwCookie
         return true;
     }
 
+    public function clearCookieGroup($groupName)
+    {
+        if (!file_exists(__DIR__.'/output/cookies/'.$groupName.'/cookies.php')) {
+            return false;
+        }
+        $clearCookies = include __DIR__.'/output/cookies/'.$groupName.'/cookies.php';
+
+        $defaults = [
+            'path'   => '/',
+            'domain' => $_SERVER['HTTP_HOST'],
+        ];
+
+        if (isset($clearCookies['defaults'])) {
+            $defaults = array_merge($defaults, $clearCookies['defaults']);
+            unset($clearCookies['defaults']);
+        }
+
+        $return = [];
+
+        foreach ($clearCookies as $cookie) {
+            $cookie['path'] = isset($cookie['path']) ? $cookie['path'] : $defaults['path'];
+            $cookie['domain'] = isset($cookie['domain']) ? $cookie['domain'] : $defaults['domain'];
+            self::destroyCookie($cookie['name'], $cookie['path'], $cookie['domain']);
+            $return[] = $cookie;
+        }
+
+        return $return;
+    }
+
     public static function getCookie($name)
     {
         // If cookie exists - return it, otherwise return false
         return isset($_COOKIE[$name]) ? $_COOKIE[$name] : false;
     }
 
-    public static function destroyCookie($name)
+    public static function destroyCookie($name, $path = '', $domain = '')
     {
         // Set cookie expiration to 1 hour ago
-        return setcookie($name, '', time() - 3600);
+        return setcookie($name, '', time() - 3600, $path, $domain);
     }
 }

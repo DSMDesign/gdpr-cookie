@@ -43,6 +43,15 @@ function scwCookiePanelToggle()
     }
 }
 
+jQuery(document).ready(function($){
+    $('.scw-cookie-switch input').each(function(){
+        if ($(this).prop('checked')) {
+            $(this).closest('.scw-cookie-switch').addClass('checked');
+        } else {
+            $(this).closest('.scw-cookie-switch').removeClass('checked');
+        }
+    });
+});
 jQuery(document).on('change', '.scw-cookie-toggle input[type="checkbox"]', function(){
     jQuery(this).closest('.scw-cookie').addClass('changed');
     jQuery(this).closest('.scw-cookie-switch').toggleClass('checked');
@@ -53,7 +62,13 @@ jQuery(document).on('change', '.scw-cookie-toggle input[type="checkbox"]', funct
             name   : jQuery(this).attr('name'),
             value  : jQuery(this).prop('checked')
         }
-    );
+    ).done(function(data){
+        if (data.hasOwnProperty('removeCookies')) {
+            jQuery.each(data.removeCookies, function(key, cookie){
+                document.cookie = cookie+'=; Max-Age=-99999999;';
+            });
+        }
+    });
 });
 
 jQuery(document).ready(function($){
@@ -62,5 +77,21 @@ jQuery(document).ready(function($){
         $(this).append('<span class="scw-cookie-tooltip">'+label+'</span>');
     }, function(){
         $(this).find('.scw-cookie-tooltip').remove();
+    });
+});
+
+jQuery(document).ready(function($){
+    jQuery.post(
+        '/scwCookie/ajax.php',
+        {
+            action : 'load',
+        }
+    ).done(function(data){
+        if (data.hasOwnProperty('removeCookies')) {
+            jQuery.each(data.removeCookies, function(key, cookie){
+                document.cookie = cookie.name+'=; Max-Age=-99999999; Domain='+cookie.domain+';';
+                document.cookie = cookie.name+'=; Max-Age=-99999999;';
+            });
+        }
     });
 });
