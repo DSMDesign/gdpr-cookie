@@ -2,6 +2,11 @@
 
 All notable changes to `gdpr-cookie` will be documented in this file.
 
+## 2.3
+- Add functionality to remove cookies on toggle of switch and at page load
+- Restructure of output directory to allow easier additions and modifications
+- More detailed comments added to README.md 
+
 ## 2.2
 - Add Tawk.to embed code
 - Add tooltips to icons
