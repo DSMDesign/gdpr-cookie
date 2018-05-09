@@ -120,15 +120,14 @@ body.scw-cookie-in {
 }
 .scw-cookie-settings .icon,
 .scw-cookie-policy .icon {
+    margin-top: -5px;
     opacity: .7;
+    position: relative;
+    top: 7px;
 }   
 .scw-cookie-settings:hover .icon,
 .scw-cookie-policy:hover .icon {
     opacity: 1;
-}
-.scw-cookie-settings .icon,
-.scw-cookie-policy .icon {
-    margin-top: -2.5px;
 }
 .scw-cookie-settings {
     cursor: pointer;
