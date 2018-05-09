@@ -4,6 +4,7 @@ All notable changes to `gdpr-cookie` will be documented in this file.
 
 ## 2.3
 - Add functionality to remove cookies on toggle of switch and at page load
+  - Usage of plugin [JS Cookie](https://github.com/js-cookie/js-cookie) to remove cookies effectively
 - Restructure of output directory to allow easier additions and modifications
 - More detailed comments added to README.md 
 
