@@ -49,4 +49,5 @@
             </div>
         </div>
     </div>
-    <script src="/scwCookie/output/assets/scwCookie.min.js" type="text/javascript"></script>
+    <script src="/scwCookie/output/assets/js-cookie.js" type="text/javascript"></script>
+    <script src="/scwCookie/output/assets/scwCookie.js" type="text/javascript"></script>

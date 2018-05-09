@@ -65,7 +65,10 @@ jQuery(document).on('change', '.scw-cookie-toggle input[type="checkbox"]', funct
     ).done(function(data){
         if (data.hasOwnProperty('removeCookies')) {
             jQuery.each(data.removeCookies, function(key, cookie){
-                document.cookie = cookie+'=; Max-Age=-99999999;';
+                Cookies.remove(cookie.name);
+                Cookies.remove(cookie.name, { domain: cookie.domain });
+                Cookies.remove(cookie.name, { path: cookie.path });
+                Cookies.remove(cookie.name, { domain: cookie.domain, path: cookie.path });
             });
         }
     });
@@ -89,8 +92,10 @@ jQuery(document).ready(function($){
     ).done(function(data){
         if (data.hasOwnProperty('removeCookies')) {
             jQuery.each(data.removeCookies, function(key, cookie){
-                document.cookie = cookie.name+'=; Max-Age=-99999999; Domain='+cookie.domain+';';
-                document.cookie = cookie.name+'=; Max-Age=-99999999;';
+                Cookies.remove(cookie.name);
+                Cookies.remove(cookie.name, { domain: cookie.domain });
+                Cookies.remove(cookie.name, { path: cookie.path });
+                Cookies.remove(cookie.name, { domain: cookie.domain, path: cookie.path });
             });
         }
     });
