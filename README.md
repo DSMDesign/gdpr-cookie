@@ -28,7 +28,7 @@ Thats it, a window will now display in the footer of your site allowing people t
 #### Remember to remove any previous cookie code, this will handle that from now on
 
 ## Demo
-A live example is available here: [https://southcoastweb.co.uk/](https://southcoastweb.co.uk/)
+A live example is available here: [https://southcoastweb.co.uk/demos/scw-cookie.php](https://southcoastweb.co.uk/demos/scw-cookie.php)
 
 ## Changelog
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
