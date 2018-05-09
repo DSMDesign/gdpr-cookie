@@ -33,13 +33,15 @@ class ScwCookie
 
     public static function encrypt($value)
     {
-        $return = json_encode($value);
+        $value  = json_encode($value);
+        $return = base64_encode($value);
         return $return;
     }
 
     public static function decrypt($value)
     {
-        $value = str_replace('\"', '"', $value);
+        $value  = base64_decode($value);
+        $value  = str_replace('\"', '"', $value);
         $return = json_decode($value, true);
         return $return;
     }
