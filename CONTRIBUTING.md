@@ -2,7 +2,7 @@
 
 Contributions are **welcome** and will be fully **credited**.
 
-We accept contributions via Pull Requests on [Github](https://github.com/southcoastweb/gdpr-cookie).
+We accept contributions via Pull Requests on [Github](https://github.com/SouthCoastWebDesign/gdpr-cookie).
 
 
 ## Pull Requests
