@@ -3,7 +3,7 @@
     <div class="scw-cookie-panel-toggle scw-cookie-panel-toggle-<?= $this->config['panelTogglePosition']; ?>"
         onclick="scwCookiePanelToggle()"
     >
-        <span class="icon icon-cookie"></span>
+        <span class="scwc-icon scwc-icon-cookie"></span>
     </div>
     <div class="scw-cookie-content">
         <div class="scw-cookie-message">
@@ -16,11 +16,11 @@
                 onclick="scwCookieDetails()"
                 data-label="Cookie settings"
             >
-                <span class="icon icon-settings"></span>
+                <span class="scwc-icon scwc-icon-settings"></span>
             </div>
             <div class="scw-cookie-policy scw-cookie-tooltip-trigger" data-label="Cookie policy">
                 <a href="<?= $this->config['cookiePolicyURL']; ?>">
-                    <span class="icon icon-policy"></span>
+                    <span class="scwc-icon scwc-icon-policy"></span>
                 </a>
             </div>
         </div>
