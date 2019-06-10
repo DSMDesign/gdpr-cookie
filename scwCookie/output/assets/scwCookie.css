@@ -5,12 +5,12 @@ body.scw-cookie-in {
 .scw-cookie-settings,
 .scw-cookie-policy,
 .scw-cookie-btn,
-.scw-cookie-settings .icon,
+.scw-cookie-settings .scwc-icon,
 .scw-cookie-switch {
     transition: all .3s ease;
 }
 
-.icon {
+.scwc-icon {
     background-image: url(icons.png);
     background-repeat: no-repeat;
     background-size: auto 100%;
@@ -18,9 +18,9 @@ body.scw-cookie-in {
     width: 25px;
     display: inline-block;
 }
-.icon.icon-cookie   { background-position: 0 0;     }
-.icon.icon-policy   { background-position: -25px 0; }
-.icon.icon-settings { background-position: -50px 0; }
+.scwc-icon.scwc-icon-cookie   { background-position: 0 0;     }
+.scwc-icon.scwc-icon-policy   { background-position: -25px 0; }
+.scwc-icon.scwc-icon-settings { background-position: -50px 0; }
 
 .scw-cookie-panel-toggle {
     background: inherit;
@@ -118,15 +118,15 @@ body.scw-cookie-in {
     text-align: center;
     width: 20px;
 }
-.scw-cookie-settings .icon,
-.scw-cookie-policy .icon {
+.scw-cookie-settings .scwc-icon,
+.scw-cookie-policy .scwc-icon {
     margin-top: -5px;
     opacity: .7;
     position: relative;
     top: 7px;
 }   
-.scw-cookie-settings:hover .icon,
-.scw-cookie-policy:hover .icon {
+.scw-cookie-settings:hover .scwc-icon,
+.scw-cookie-policy:hover .scwc-icon {
     opacity: 1;
 }
 .scw-cookie-settings {
