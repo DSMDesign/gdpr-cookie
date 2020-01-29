@@ -1,4 +1,4 @@
-# SCW Cookie 2.3
+# DSM Cookie 2.3
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/southcoastweb/gdpr-cookie/badges/quality-score.png)](https://scrutinizer-ci.com/g/southcoastweb/gdpr-cookie/?branch=2.2)
@@ -10,13 +10,13 @@ This small class will add a cookie toggle window to any website.
 
 To add this functionality within a site simply follow the below steps :
 
-1. Upload the entire scwCookie folder into the public_html (or similar) root folder of your website.
+1. Upload the entire dsmCookie folder into the public_html (or similar) root folder of your website.
 
-2. If done correctly you will then be able to visit [domain]/scwCookie/install-check.txt and see the "Installed correctly" message.
+2. If done correctly you will then be able to visit [domain]/dsmCookie/install-check.txt and see the "Installed correctly" message.
 
 3. Then add the following code at the very end / just before the closing body tag of each page:
 ```
-<?php require_once $_SERVER['DOCUMENT_ROOT'].'/scwCookie/output/scwCookie.php'; ?>
+<?php require_once $_SERVER['DOCUMENT_ROOT'].'/dsmCookie/output/scwCookie.php'; ?>
 ```
 
 4. Rename config.example.ini to config.ini
@@ -28,7 +28,7 @@ Thats it, a window will now display in the footer of your site allowing people t
 #### Remember to remove any previous cookie code, this will handle that from now on
 
 ## Demo
-A live example is available here: [https://southcoastweb.co.uk/demos/scw-cookie.php](https://southcoastweb.co.uk/demos/scw-cookie.php)
+A live example is available here: [https://dsmdesign.co.uk(https://dsmdesign.co.uk)
 
 ## Changelog
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
